@@ -20,3 +20,6 @@ python -m tools.generate_model --mysql-host mysql-host --mysql-user mysql-user -
 #### support
 
 - [x] xlsx
+
+## TODO
+- [ ] Job Config operation(like datax)
