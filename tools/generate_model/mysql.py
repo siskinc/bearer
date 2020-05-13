@@ -1,7 +1,7 @@
 import pymysql
 from typing import List
 from .struct_info import TableStructInfo
-from . import logger
+from tools.generate_model import logger
 
 
 def is_field(field: str) -> bool:
@@ -58,9 +58,9 @@ def get_mysql_info(host: str, user: str, password: str, port: int, database: str
             continue
         table_struct = data[1]
         # logger.info(table_struct)
-        class_name = ''.join(word.title() for word in table[2:].split('_'))
+        # class_name = table_name_to_class_name(table)
         table_struct_lines = table_struct.split('\n')
-        info = TableStructInfo(class_name)
+        info = TableStructInfo(table)
         for table_struct_line in table_struct_lines:
             table_struct_line = table_struct_line.strip()
             # logger.info(table_struct_line)

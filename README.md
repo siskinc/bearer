@@ -1,5 +1,22 @@
-
-## demo
+# export-data-from-database-to-something
+## generate model from database
+### support database type
+    - mysql
+    - influxdb
+#### generate demo
 ```shell script
-python generate_model.py --mysql-host mysql-demo.middleware.rktl.xyz --mysql-user iot_rw --mysql-password FPVjkJjkcE0jz7Ff --mysql-port 3306 --database iot_rockontrol_taiyuan_mobile --table t_original_mobile_data_5_m202005
+python -m tools.generate_model --mysql-host mysql-host --mysql-user mysql-user --mysql-password mysql-password --mysql-port 3306 --database database --table table1 --table table2 --file-path a.py
 ```
+
+## data reader
+### support
+
+- [x] MySQL
+- [x] InfluxDB
+- [ ] MongoDB
+
+### export
+
+#### support
+
+- [x] xlsx

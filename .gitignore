@@ -1,3 +1,12 @@
 /venv/
 /models/*.py
 /.idea/
+/example-command
+/vehicle_export.py
+/**/*.xlsx
+/**/*.xls
+/**/*.zip
+/**/*.7z
+*.log
+**/__pycache__/
+/taiyuan_raw_data/
