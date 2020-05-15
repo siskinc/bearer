@@ -6,7 +6,7 @@ from tools.generate_model.influx import get_influx_info
 
 
 def main():
-    parser = argparse.ArgumentParser(description='export mysql data to excel')
+    parser = argparse.ArgumentParser(description='export mysql table struct to python class')
     parser.add_argument('--host', type=str, help='host', dest="host", required=True)
     parser.add_argument('--user', type=str, dest="user")
     parser.add_argument('--password', type=str, dest="password")

@@ -10,3 +10,4 @@
 *.log
 **/__pycache__/
 /taiyuan_raw_data/
+/config.json

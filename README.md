@@ -1,4 +1,4 @@
-# export-data-from-database-to-something
+# bearer
 ## generate model from database
 ### support database type
     - mysql
@@ -22,4 +22,4 @@ python -m tools.generate_model --mysql-host mysql-host --mysql-user mysql-user -
 - [x] xlsx
 
 ## TODO
-- [ ] Job Config operation(like datax)
+- [x] Job Config operation(like datax)

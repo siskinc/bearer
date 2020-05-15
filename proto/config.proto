@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+enum DataBaseType {
+    DataBaseTypeMysql = 0;
+    DataBaseTypeInflux = 1;
+}
+
+message Model {
+    string name = 1;
+    repeated string fields = 2;
+    repeated string comments = 3;
+}
+
+message DataBaseInformation {
+    string host = 1;
+    string username = 2;
+    string password = 3;
+    int32 port = 4;
+    string database_name = 5;
+    int32 data_base_type = 6;
+    map<string, string> misc = 7;
+}
+
+enum ExportType {
+    ExportTypeExcel = 0;
+}
+
+message ExportInformation {
+    string output_file_path = 1;
+    map<string, string> misc = 2;
+    int32 export_type = 3;
+}
+
+message JobInformation {
+    string name = 1;
+    string where = 2;
+    uint32 batch_size = 3;
+    DataBaseInformation database = 4;
+    ExportInformation export = 5;
+    string model = 6;
+}
+
+message Configure {
+    DataBaseInformation database = 1;
+    repeated Model models = 2;
+    repeated JobInformation jobs = 3;
+}
