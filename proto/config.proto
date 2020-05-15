@@ -23,6 +23,7 @@ message DataBaseInformation {
 
 enum ExportType {
     ExportTypeExcel = 0;
+    ExportTypeCsv = 1;
 }
 
 message ExportInformation {

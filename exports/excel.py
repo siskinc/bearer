@@ -1,4 +1,4 @@
-from .export import Export
+from exports.export import Export
 import openpyxl
 
 

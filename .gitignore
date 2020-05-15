@@ -7,6 +7,7 @@
 /**/*.xls
 /**/*.zip
 /**/*.7z
+/**/*.csv
 *.log
 **/__pycache__/
 /taiyuan_raw_data/
