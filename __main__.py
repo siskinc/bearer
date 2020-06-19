@@ -19,6 +19,7 @@ def merge_database(global_database, database):
         database.misc.update(global_database.misc)
     if not database.database_name:
         database.database_name = global_database.database_name
+        database.data_base_type = global_database.data_base_type
     return database
 
 
@@ -61,7 +62,7 @@ def read_config(config_path):
 
 def main():
     parser = argparse.ArgumentParser(description='export mysql data to excel')
-    parser.add_argument('--config-path', type=str, default='config.json', help='config-path', dest="config_path")
+    parser.add_argument('--config-path', type=str, help='config-path', dest="config_path")
     args = parser.parse_args()
     config_path = args.config_path
     configure = read_config(config_path)
