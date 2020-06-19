@@ -19,21 +19,23 @@ class MysqlDataReader(DataReader):
         field_list = model.fields
         limit = kwargs.get('limit', 1000)
         sql_str = 'select {} from {}'.format(','.join(field_list), table_name)
-        if where:
-            sql_str = '{} where {}'.format(sql_str, where)
+        if not where:
+            where = [""]
         self.connection.select_db(database)
         cursor = self.connection.cursor()
-        offset = 0
         result = []
-        while True:
-            exec_sql_str = '{} limit {}, {}'.format(sql_str, offset, limit)
-            print(exec_sql_str)
-            cursor.execute(exec_sql_str)
-            data_list = cursor.fetchall()
-            # print(data_list)
-            result = result + list(data_list)
-            if len(data_list) < limit:
-                break
-            offset += len(data_list)
-        cursor.close()
+        for where_item in where:
+            sql_str = '{} where {}'.format(sql_str, where_item)
+            offset = 0
+            while True:
+                exec_sql_str = '{} limit {}, {}'.format(sql_str, offset, limit)
+                print(exec_sql_str)
+                cursor.execute(exec_sql_str)
+                data_list = cursor.fetchall()
+                # print(data_list)
+                result = result + list(data_list)
+                if len(data_list) < limit:
+                    break
+                offset += len(data_list)
+            cursor.close()
         return result

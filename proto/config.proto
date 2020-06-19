@@ -34,7 +34,7 @@ message ExportInformation {
 
 message JobInformation {
     string name = 1;
-    string where = 2;
+    repeated string where = 2;
     uint32 batch_size = 3;
     DataBaseInformation database = 4;
     ExportInformation export = 5;

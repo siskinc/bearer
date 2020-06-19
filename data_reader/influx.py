@@ -12,30 +12,34 @@ class InfluxDataReader(DataReader):
         field_list = model.fields
         limit = kwargs.get('limit', 1000)
         sql_str = 'select {} from {}'.format(','.join(field_list), table_name)
-        if where:
-            sql_str = '{} where {}'.format(sql_str, where)
-        self.influx_client.switch_database(database)
-        # self.connection.select_db(database)
-        # cursor = self.connection.cursor()
-        offset = 0
         result = []
-        while True:
-            exec_sql_str = sql_str
-            if limit > 0:
-                exec_sql_str = '{} LIMIT {} OFFSET {}'.format(exec_sql_str, limit, offset)
-            print(exec_sql_str)
-            resp = self.influx_client.query(exec_sql_str)
-            count = 0
-            for fields in resp:
-                for field in fields:
-                    count += 1
-                    data = []
-                    for excel_field in field_list:
-                        data.append(field[excel_field])
-                    result.append(data)
-            if limit <= 0:
-                break
-            if count < limit:
-                break
-            offset += count
+        if not where:
+            where = [""]
+        for where_item in where:
+            sql_str_sub = sql_str
+            if where_item:
+                sql_str_sub = '{} where {}'.format(sql_str, where_item)
+            self.influx_client.switch_database(database)
+            # self.connection.select_db(database)
+            # cursor = self.connection.cursor()
+            offset = 0
+            while True:
+                exec_sql_str = sql_str_sub
+                if limit > 0:
+                    exec_sql_str = '{} LIMIT {} OFFSET {}'.format(exec_sql_str, limit, offset)
+                print(exec_sql_str)
+                resp = self.influx_client.query(exec_sql_str)
+                count = 0
+                for fields in resp:
+                    for field in fields:
+                        count += 1
+                        data = []
+                        for excel_field in field_list:
+                            data.append(field[excel_field])
+                        result.append(data)
+                if limit <= 0:
+                    break
+                if count < limit:
+                    break
+                offset += count
         return result
