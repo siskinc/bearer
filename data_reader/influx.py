@@ -20,7 +20,9 @@ class InfluxDataReader(DataReader):
         offset = 0
         result = []
         while True:
-            exec_sql_str = '{} LIMIT {} OFFSET {}'.format(sql_str, limit, offset)
+            exec_sql_str = sql_str
+            if limit > 0:
+                exec_sql_str = '{} LIMIT {} OFFSET {}'.format(exec_sql_str, limit, offset)
             print(exec_sql_str)
             resp = self.influx_client.query(exec_sql_str)
             count = 0
@@ -31,6 +33,8 @@ class InfluxDataReader(DataReader):
                     for excel_field in field_list:
                         data.append(field[excel_field])
                     result.append(data)
+            if limit <= 0:
+                break
             if count < limit:
                 break
             offset += count

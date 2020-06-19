@@ -1,5 +1,5 @@
 import argparse
-from protocal.config_pb2 import Configure
+from protocal.config_pb2 import Configure, DataBaseType
 from google.protobuf.json_format import Parse
 from __init__ import logger
 from exports import get_export
@@ -46,7 +46,8 @@ def exec_jobs(configure):
             raise ValueError('not found database reader, data base type: {}'.format(database.data_base_type))
         batch_size = job.batch_size
         if batch_size == 0:
-            batch_size = 1000
+            if database.data_base_type == DataBaseType.DataBaseTypeMysql:
+                batch_size = 1000
         data_list = data_reader.get_data(model, database.database_name, limit=batch_size, where=job.where,
                                          **database.misc)
         export.export(model=model, data_list=data_list, file_path=job.export.output_file_path, **job.export.misc)
