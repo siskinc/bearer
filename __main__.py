@@ -4,6 +4,7 @@ from google.protobuf.json_format import Parse
 from __init__ import logger
 from exports import get_export
 from data_reader import get_data_reader
+from pyfiglet import figlet_format
 
 
 def merge_database(global_database, database):
@@ -67,6 +68,7 @@ def main():
     args = parser.parse_args()
     config_path = args.config_path
     configure = read_config(config_path)
+    print(figlet_format('bearer', font='starwars'))
     exec_jobs(configure)
 
 
